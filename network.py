@@ -133,5 +133,11 @@ network.train(data, all_y_trues)
 # Make some predictions
 emily = np.array([-7, -3]) # 128 pounds, 63 inches
 frank = np.array([20, 2])  # 155 pounds, 68 inches
+Inna= np.array([-15,-2])
+Egor= np.array([36,6])
+Youra= np.array([60,7])
 print("Emily: %.3f" % network.feedforward(emily)) # 0.951 - F
 print("Frank: %.3f" % network.feedforward(frank)) # 0.039 - M
+print("Inna: %.3f" % network.feedforward(Inna)) # 
+print("Egor: %.3f" % network.feedforward(Egor)) # 
+print("Youra: %.3f" % network.feedforward(Youra)) # 

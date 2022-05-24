@@ -1,5 +1,5 @@
 import numpy as np
-
+#Игра камень ножницы бумага  на вход подаются 2 значения мои и противника где -1- камень 0-бумага,а 1-ножницы 
 def sigmoid(x):
   # Sigmoid activation function: f(x) = 1 / (1 + e^(-x))
   return 1 / (1 + np.exp(-x))
@@ -114,16 +114,20 @@ class OurNeuralNetwork:
 
 # Define dataset
 data = np.array([
-  [-2, -1],  # Alice
-  [25, 6],   # Bob
-  [17, 4],   # Charlie
-  [-15, -6], # Diana
+  [-1, -1],  
+  [-1, 0],   
+  [-1, 1],   
+  [0, -1], 
+  [0, 1],
+  [1, 1], 
 ])
 all_y_trues = np.array([
-  1, # Alice
-  0, # Bob
-  0, # Charlie
-  1, # Diana
+  0, 
+  -1, 
+  1, 
+  1,
+ -1,
+ 0,
 ])
 
 # Train our neural network!
@@ -131,13 +135,8 @@ network = OurNeuralNetwork()
 network.train(data, all_y_trues)
 
 # Make some predictions
-emily = np.array([-7, -3]) # 128 pounds, 63 inches
-frank = np.array([20, 2])  # 155 pounds, 68 inches
-Inna= np.array([-15,-2])
-Egor= np.array([36,6])
-Youra= np.array([60,7])
-print("Emily: %.3f" % network.feedforward(emily)) # 0.951 - F
-print("Frank: %.3f" % network.feedforward(frank)) # 0.039 - M
-print("Inna: %.3f" % network.feedforward(Inna)) # 
-print("Egor: %.3f" % network.feedforward(Egor)) # 
-print("Youra: %.3f" % network.feedforward(Youra)) # 
+first = np.array([0, 0]) # 128 pounds, 63 inches
+second = np.array([1, 1])  # 155 pounds, 68 inches
+print("First game: %.3f" % network.feedforward(first)) 
+print("Second game: %.3f" % network.feedforward(second)) 
+

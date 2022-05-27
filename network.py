@@ -1,3 +1,4 @@
+from cProfile import label
 import numpy as np
 from tkinter import *
 #Игра камень ножницы бумага  на вход подаются 2 значения мои и противника где -1- камень 0-бумага,а 1-ножницы 
@@ -15,6 +16,7 @@ def mse_loss(y_true, y_pred):
   return ((y_true - y_pred) ** 2).mean()
 
 class OurNeuralNetwork:
+  
   '''
   A neural network with:
     - 2 inputs
@@ -112,11 +114,20 @@ class OurNeuralNetwork:
         y_preds = np.apply_along_axis(self.feedforward, 1, data)
         loss = mse_loss(all_y_trues, y_preds)
         print("Epoch %d loss: %.3f" % (epoch, loss))
-def str_to_sort_list(event):
-    s = ent.get()
+class Block:
+  def __init__(self,master):
+    self.ent=Entry(master,width=20)
+    self.but=Button(master,text="Выполнить")
+    self.lab=Label(master,width=20, bg='black', fg='white')
+    self.but['command']=self.str_to_sort_list
+    self.ent.pack()
+    self.but.pack()
+    self.lab.pack()
+  def str_to_sort_list(self):
+    s = self.ent.get()
     s = s.split()
     s.sort()
-    lab['text'] = ' '.join(s)
+    self.lab['text'] = ' '.join(s)
 # # Define dataset
 # data = np.array([
 #   [-1, -1],  
@@ -145,24 +156,13 @@ def str_to_sort_list(event):
 # print("First game: %.3f" % network.feedforward(first)) 
 # print("Second game: %.3f" % network.feedforward(second)) 
 #GUI/////////////////////////////
- 
-def str_to_sort_list(event):
-    s = ent.get()
-    s = s.split()
-    s.sort()
-    lab['text'] = ' '.join(s)
+
+
  
  
 root = Tk()
  
-ent = Entry(width=20)
-but = Button(text="Преобразовать")
-lab = Label(width=20, bg='black', fg='white')
- 
-but.bind('<Button-1>', str_to_sort_list)
- 
-ent.pack()
-but.pack()
-lab.pack()
-root.mainloop()
+first_block = Block(root, )
 
+ 
+root.mainloop()

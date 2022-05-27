@@ -1,4 +1,5 @@
 import numpy as np
+from tkinter import *
 #Игра камень ножницы бумага  на вход подаются 2 значения мои и противника где -1- камень 0-бумага,а 1-ножницы 
 def sigmoid(x):
   # Sigmoid activation function: f(x) = 1 / (1 + e^(-x))
@@ -111,32 +112,57 @@ class OurNeuralNetwork:
         y_preds = np.apply_along_axis(self.feedforward, 1, data)
         loss = mse_loss(all_y_trues, y_preds)
         print("Epoch %d loss: %.3f" % (epoch, loss))
+def str_to_sort_list(event):
+    s = ent.get()
+    s = s.split()
+    s.sort()
+    lab['text'] = ' '.join(s)
+# # Define dataset
+# data = np.array([
+#   [-1, -1],  
+#   [-1, 0],   
+#   [-1, 1],   
+#   [0, -1], 
+#   [0, 1],
+#   [1, 1], 
+# ])
+# all_y_trues = np.array([
+#   0, 
+#   -1, 
+#   1, 
+#   1,
+#  -1,
+#  0,
+# ])
 
-# Define dataset
-data = np.array([
-  [-1, -1],  
-  [-1, 0],   
-  [-1, 1],   
-  [0, -1], 
-  [0, 1],
-  [1, 1], 
-])
-all_y_trues = np.array([
-  0, 
-  -1, 
-  1, 
-  1,
- -1,
- 0,
-])
+# # Train our neural network!
+# network = OurNeuralNetwork()
+# network.train(data, all_y_trues)
 
-# Train our neural network!
-network = OurNeuralNetwork()
-network.train(data, all_y_trues)
-
-# Make some predictions
-first = np.array([0, 0]) # 128 pounds, 63 inches
-second = np.array([1, 1])  # 155 pounds, 68 inches
-print("First game: %.3f" % network.feedforward(first)) 
-print("Second game: %.3f" % network.feedforward(second)) 
+# # Make some predictions
+# first = np.array([0, 0]) # 128 pounds, 63 inches
+# second = np.array([1, 1])  # 155 pounds, 68 inches
+# print("First game: %.3f" % network.feedforward(first)) 
+# print("Second game: %.3f" % network.feedforward(second)) 
+#GUI/////////////////////////////
+ 
+def str_to_sort_list(event):
+    s = ent.get()
+    s = s.split()
+    s.sort()
+    lab['text'] = ' '.join(s)
+ 
+ 
+root = Tk()
+ 
+ent = Entry(width=20)
+but = Button(text="Преобразовать")
+lab = Label(width=20, bg='black', fg='white')
+ 
+but.bind('<Button-1>', str_to_sort_list)
+ 
+ent.pack()
+but.pack()
+lab.pack()
+root.mainloop()
 

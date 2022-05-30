@@ -116,18 +116,45 @@ class OurNeuralNetwork:
         print("Epoch %d loss: %.3f" % (epoch, loss))
 class Block:
   def __init__(self,master):
-    self.ent=Entry(master,width=20)
-    self.but=Button(master,text="Выполнить")
-    self.lab=Label(master,width=20, bg='black', fg='white')
-    self.but['command']=self.str_to_sort_list
-    self.ent.pack()
-    self.but.pack()
+    self.first=Entry(master,width=40)
+    self.second=Entry(master,width=40)
+    self.summ=Button(master,text="+")
+    self.sub=Button(master,text="-")
+    self.div=Button(master,text="/")
+    self.mul=Button(master,text="*")
+    self.lab=Label(master,width=20, bg='blue', fg='black')
+    self.summ['command']=self.sum_numders
+    self.sub['command']=self.sub_numders
+    self.div['command']=self.division
+    self.mul['command']=self.mult
+    self.first.pack()
+    self.second.pack()
+    self.summ.pack()
+    self.sub.pack()
+    self.div.pack()
+    self.mul.pack()
     self.lab.pack()
-  def str_to_sort_list(self):
-    s = self.ent.get()
-    s = s.split()
-    s.sort()
-    self.lab['text'] = ' '.join(s)
+  def sum_numders(self):
+    s = int(self.first.get())+int(self.second.get())
+    self.lab['text'] = ' '.join(str(s))
+  def sub_numders(self):
+    s = int(self.first.get())-int(self.second.get())
+    self.lab['text'] = ' '.join(str(s))
+  def division(self):
+    if self.second.get()!='0': 
+      s = int(self.first.get())/int(self.second.get())
+      self.lab['text'] = ' '.join(str(s))
+    else:
+      self.lab['text'] = 'На ноль делить нельзя, СУКА!'
+  def mult(self):
+    if self.first.get().isdigit() and self.second.get().isdigit():
+      s=int(self.first.get())*int(self.second.get())
+      self.lab['text']=' '.join(str(s))
+    else:
+      self.lab['text']='Ты что самый'
+
+
+
 # # Define dataset
 # data = np.array([
 #   [-1, -1],  
@@ -162,7 +189,7 @@ class Block:
  
 root = Tk()
  
-first_block = Block(root, )
+first_block = Block(root)
 
  
 root.mainloop()
